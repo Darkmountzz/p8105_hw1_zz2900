@@ -15,11 +15,20 @@ This is an R Markdown document. Markdown is a simple formatting syntax for autho
 
 When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
 
-```{r cars}
-summary(cars)
+```{r penguins}
+
+data("penguins", package = "palmerpenguins")
+penguins
+
 ```
 
-## Including Plots
+* the data in this dataset, including names / values of important variables
+
+There are 8 important variables in the penguins dataset. These 8 variables are species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex, year
+
+* the size of the dataset (using nrow and ncol)
+
+* the mean flipper length
 
 You can also embed plots, for example:
 
