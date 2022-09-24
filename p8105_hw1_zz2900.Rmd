@@ -2,7 +2,7 @@
 title: "p8105_hw1_zz2900.Rmd"
 author: "Zhenyu Zhou"
 date: "2022-09-22"
-output: html_document
+output: html_document 
 ---
 ```{r}
 library(tidyverse)
