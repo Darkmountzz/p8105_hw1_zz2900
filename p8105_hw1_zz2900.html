@@ -385,21 +385,26 @@ pre code {
 dataset:</p>
 <pre class="r"><code>#load the penguins dataset
 data(&quot;penguins&quot;, package = &quot;palmerpenguins&quot;)</code></pre>
-<p>Write a short description of the penguins dataset (not the
-penguins_raw dataset) using inline R code. In your discussion, please
-include:</p>
 <ul>
-<li><p>the data in this dataset, including names / values of important
-variables:</p>
+<li><p>Short description:</p>
 <ul>
-<li>There are 8 important variables in the penguins dataset. These 8
+<li><p>There are 8 important variables in the penguins dataset. These 8
 variables are species, island, bill_length_mm, bill_depth_mm,
-flipper_length_mm, body_mass_g, sex, year.</li>
+flipper_length_mm, body_mass_g, sex, year.</p></li>
+<li><p>species is a factor variable: Adelie, Chinstrap, Gentoo.</p></li>
+<li><p>island is a factor variable: Biscoe, Dream, and Torgersen
+islands.</p></li>
+<li><p>bill_length_mm is a numeric variable.</p></li>
+<li><p>bill_depth_mm is a numeric variable.</p></li>
+<li><p>flipper_length_mm is a integer variable.</p></li>
+<li><p>body_mass_g is a integer variable.</p></li>
+<li><p>sex is a factor variable: male, female.</p></li>
+<li><p>year is an integer variable.</p></li>
 </ul></li>
 <li><p>the size of the dataset (using nrow and ncol):</p>
 <ul>
 <li>The row number of penguins is 344 and column number of penguins is
-8. So the size of the dataset is 2752.</li>
+8.</li>
 </ul></li>
 <li><p>the mean flipper length:</p></li>
 </ul>
@@ -407,9 +412,10 @@ flipper_length_mm, body_mass_g, sex, year.</li>
 noNA_penguins = drop_na(penguins)
 
 #get the mean of fliiper length
-flipperMean = mean(pull(noNA_penguins, flipper_length_mm))
-flipperMean</code></pre>
-<pre><code>## [1] 200.967</code></pre>
+flipperMean = mean(pull(noNA_penguins, flipper_length_mm))</code></pre>
+<ul>
+<li>So the mean of fliiper length is 200.966967.</li>
+</ul>
 </div>
 <div id="export-my-first-scatterplot-using-ggsave." class="section level2">
 <h2>Export my first scatterplot using ggsave.</h2>
@@ -422,47 +428,24 @@ ggplot(noNA_penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = spe
 <div id="problem-2" class="section level2">
 <h2>Problem 2</h2>
 <ul>
-<li><p>Create a data frame comprised of:</p>
-<ul>
-<li><p>a random sample of size 10 from a standard Normal
-distribution</p></li>
-<li><p>a logical vector indicating whether elements of the sample are
-greater than 0</p></li>
-<li><p>a character vector of length 10</p></li>
-<li><p>a factor vector of length 10, with 3 different factor
-“levels”</p></li>
-</ul>
+<li><p>Create my data frame:</p>
 <pre class="r"><code># make my dataframe
 my_df = tibble(
 random_samp = rnorm(10),
 logical_vec = random_samp &gt; 0,
 vec_char = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;),
 factor_vector = factor(c(&quot;30&quot;, &quot;40&quot;, &quot;50&quot;, &quot;60&quot;, &quot;70&quot;, &quot;80&quot;, &quot;90&quot;, &quot;20&quot;, &quot;30&quot;, &quot;40&quot;))
-)
-
-my_df</code></pre>
-<pre><code>## # A tibble: 10 × 4
-##    random_samp logical_vec vec_char factor_vector
-##          &lt;dbl&gt; &lt;lgl&gt;       &lt;chr&gt;    &lt;fct&gt;        
-##  1      1.26   TRUE        a        30           
-##  2     -1.49   FALSE       b        40           
-##  3     -0.0445 FALSE       c        50           
-##  4      1.62   TRUE        d        60           
-##  5     -0.785  FALSE       e        70           
-##  6      1.97   TRUE        f        80           
-##  7      3.29   TRUE        g        90           
-##  8      0.488  TRUE        h        20           
-##  9     -1.26   FALSE       i        30           
-## 10      0.505  TRUE        j        40</code></pre></li>
+)</code></pre></li>
 <li><p>Try to take the mean of each variable in your dataframe. What
 works and what doesn’t?</p>
+<p><strong>My Answer:</strong></p>
 <ul>
-<li><p>The mean of random_samp is 0.5548979.</p></li>
-<li><p>The mean of logical_vec is 0.6.</p></li>
+<li><p>The mean of random_samp is -0.2303622.</p></li>
+<li><p>The mean of logical_vec is 0.5.</p></li>
 <li><p>The mean of vec_char is NA.</p></li>
 <li><p>The mean of factor_vector is NA.</p></li>
 <li><p>In my datafram, we can get mean for random_samp and logical_vec.
-Also, we cannot get mean for vec_char and factor_vector.</p></li>
+But we cannot get mean for vec_char and factor_vector.</p></li>
 </ul></li>
 <li><p>In some cases, you can explicitly convert variables from one type
 to another. Write a code chunk that applies the as.numeric function to
@@ -474,6 +457,7 @@ numeric_logical_vec = as.numeric(pull(my_df, logical_vec))
 numeric_vec_char = as.numeric(pull(my_df, vec_char))</code></pre>
 <pre><code>## Warning: NAs introduced by coercion</code></pre>
 <pre class="r"><code>numeric_factor_vector = as.numeric(pull(my_df, factor_vector))</code></pre>
+<p><strong>My Answer:</strong></p>
 <ul>
 <li><p>When I use as.numeric function to the logical variables, TRUE
 turns to number 1 and FALSE turns to number 0.</p></li>
@@ -483,7 +467,7 @@ character variables turn to NAs.</p></li>
 variables turn to numbers.</p></li>
 <li><p>Therefore, this help explain the mean of vec_char and the mean of
 factor_vector are NAs.</p></li>
-<li><p>The mean of numeric_logical_vec is 0.6.</p></li>
+<li><p>The mean of numeric_logical_vec is 0.5.</p></li>
 <li><p>The mean of numeric_vec_char is NA.</p></li>
 <li><p>The mean of numeric_factor_vector is 4.1.</p></li>
 <li><p>After using as.numeric function, we can turn logical variables,
