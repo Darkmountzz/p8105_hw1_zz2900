@@ -15,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 Use the following code (in your RMarkdown file) to load the penguins dataset:
 
 ```{r penguins}
-
+#load the penguins dataset
 data("penguins", package = "palmerpenguins")
 penguins
 
@@ -31,7 +31,10 @@ Write a short description of the penguins dataset (not the penguins_raw dataset)
 
 * the mean flipper length:
 ```{r}
+#drop NA from penguins data frame
 noNA_penguins = drop_na(penguins)
+
+#get the mean of fliiper length
 flipperMean = mean(pull(noNA_penguins, flipper_length_mm))
 flipperMean
 ```
@@ -41,7 +44,7 @@ Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points 
 Export your first scatterplot to your project directory using ggsave.
 
 ```{r}
-## scatterplot of x and y
+## scatterplot of flipper_length_mm (y) vs bill_length_mm (x)
 ggplot(noNA_penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
 ggsave("scatter_plot.pdf")
 ```
