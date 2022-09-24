@@ -437,6 +437,80 @@ ggplot(noNA_penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = spe
 <pre class="r"><code>ggsave(&quot;scatter_plot.pdf&quot;)</code></pre>
 <pre><code>## Saving 7 x 5 in image</code></pre>
 </div>
+<div id="problem-2" class="section level2">
+<h2>Problem 2</h2>
+<ul>
+<li><p>Create a data frame comprised of:</p>
+<ul>
+<li><p>a random sample of size 10 from a standard Normal
+distribution</p></li>
+<li><p>a logical vector indicating whether elements of the sample are
+greater than 0</p></li>
+<li><p>a character vector of length 10</p></li>
+<li><p>a factor vector of length 10, with 3 different factor
+“levels”</p></li>
+</ul>
+<pre class="r"><code># make my dataframe
+my_df = tibble(
+random_samp = rnorm(10),
+logical_vec = random_samp &gt; 0,
+vec_char = c(&quot;a&quot;, &quot;b&quot;, &quot;c&quot;, &quot;d&quot;, &quot;e&quot;, &quot;f&quot;, &quot;g&quot;, &quot;h&quot;, &quot;i&quot;, &quot;j&quot;),
+factor_vector = factor(c(&quot;30&quot;, &quot;40&quot;, &quot;50&quot;, &quot;60&quot;, &quot;70&quot;, &quot;80&quot;, &quot;90&quot;, &quot;20&quot;, &quot;30&quot;, &quot;40&quot;))
+)
+
+my_df</code></pre>
+<pre><code>## # A tibble: 10 × 4
+##    random_samp logical_vec vec_char factor_vector
+##          &lt;dbl&gt; &lt;lgl&gt;       &lt;chr&gt;    &lt;fct&gt;        
+##  1    -0.0995  FALSE       a        30           
+##  2     0.554   TRUE        b        40           
+##  3    -0.118   FALSE       c        50           
+##  4    -1.22    FALSE       d        60           
+##  5     0.00133 TRUE        e        70           
+##  6    -1.17    FALSE       f        80           
+##  7    -0.237   FALSE       g        90           
+##  8    -0.809   FALSE       h        20           
+##  9    -0.875   FALSE       i        30           
+## 10    -0.295   FALSE       j        40</code></pre></li>
+<li><p>Try to take the mean of each variable in your dataframe. What
+works and what doesn’t?</p>
+<ul>
+<li><p>The mean of random_samp is -0.4266543.</p></li>
+<li><p>The mean of logical_vec is 0.2.</p></li>
+<li><p>The mean of vec_char is NA.</p></li>
+<li><p>The mean of factor_vector is NA.</p></li>
+<li><p>In my datafram, we can get mean for random_samp and logical_vec.
+Also, we cannot get mean for vec_char and factor_vector.</p></li>
+</ul></li>
+<li><p>In some cases, you can explicitly convert variables from one type
+to another. Write a code chunk that applies the as.numeric function to
+the logical, character, and factor variables (please show this chunk but
+not the output). What happens, and why? Does this help explain what
+happens when you try to take the mean?</p>
+<pre class="r"><code>#applies the as.numeric function to the logical, character, and factor variables
+numeric_logical_vec = as.numeric(pull(my_df, logical_vec))
+numeric_vec_char = as.numeric(pull(my_df, vec_char))</code></pre>
+<pre><code>## Warning: NAs introduced by coercion</code></pre>
+<pre class="r"><code>numeric_factor_vector = as.numeric(pull(my_df, factor_vector))</code></pre>
+<ul>
+<li><p>When I use as.numeric function to the logical variables, TRUE
+turns to number 1 and FALSE turns to number 0.</p></li>
+<li><p>When I use as.numeric function to the character variables,
+character variables turn to NAs.</p></li>
+<li><p>When I use as.numeric function to the factor variables, factor
+variables turn to numbers.</p></li>
+<li><p>Therefore, this help explain the mean of vec_char and the mean of
+factor_vector are NAs.</p></li>
+<li><p>The mean of numeric_logical_vec is 0.2.</p></li>
+<li><p>The mean of numeric_vec_char is NA.</p></li>
+<li><p>The mean of numeric_factor_vector is 4.1.</p></li>
+<li><p>After using as.numeric function, we can turn logical variables,
+and factor variables to numeric variables and get mean of them. But we
+cannot turn character variables to numeric variables and we cannot get
+mean of character variables.</p></li>
+</ul></li>
+</ul>
+</div>
 
 
 

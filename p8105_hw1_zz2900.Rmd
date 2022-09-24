@@ -49,3 +49,61 @@ ggplot(noNA_penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = spe
 ggsave("scatter_plot.pdf")
 ```
 
+## Problem 2
+* Create a data frame comprised of:
+  
+  * a random sample of size 10 from a standard Normal distribution
+
+  * a logical vector indicating whether elements of the sample are greater than 0
+
+  * a character vector of length 10
+
+  * a factor vector of length 10, with 3 different factor “levels”
+
+  ```{r}
+# make my dataframe
+my_df = tibble(
+  random_samp = rnorm(10),
+  logical_vec = random_samp > 0,
+  vec_char = c("a", "b", "c", "d", "e", "f", "g", "h", "i", "j"),
+  factor_vector = factor(c("30", "40", "50", "60", "70", "80", "90", "20", "30", "40"))
+)
+
+my_df
+```
+* Try to take the mean of each variable in your dataframe. What works and what doesn’t?
+
+  * The mean of random_samp is `r mean(pull(my_df, random_samp))`.
+
+  * The mean of logical_vec is `r mean(pull(my_df, logical_vec))`.
+
+  * The mean of vec_char is `r mean(pull(my_df, vec_char))`.
+
+  * The mean of factor_vector is `r mean(pull(my_df, factor_vector))`.
+
+  * In my datafram, we can get mean for random_samp and logical_vec. Also, we cannot get mean for vec_char and factor_vector.
+
+* In some cases, you can explicitly convert variables from one type to another. Write a code chunk that applies the as.numeric function to the logical, character, and factor variables (please show this chunk but not the output). What happens, and why? Does this help explain what happens when you try to take the mean?
+  
+  ```{r}
+#applies the as.numeric function to the logical, character, and factor variables
+numeric_logical_vec = as.numeric(pull(my_df, logical_vec))
+numeric_vec_char = as.numeric(pull(my_df, vec_char))
+numeric_factor_vector = as.numeric(pull(my_df, factor_vector))
+```
+
+  * When I use as.numeric function to the logical variables, TRUE turns to number 1 and FALSE turns to number 0. 
+
+  * When I use as.numeric function to the character variables, character variables turn to NAs.
+
+  * When I use as.numeric function to the factor variables, factor variables turn to numbers.
+
+  * Therefore, this help explain the mean of vec_char and the mean of factor_vector are NAs.
+
+  * The mean of numeric_logical_vec is `r mean(numeric_logical_vec)`.
+
+  * The mean of numeric_vec_char is `r mean(numeric_vec_char)`.
+
+  * The mean of numeric_factor_vector is `r mean(numeric_factor_vector)`.
+
+  * After using as.numeric function, we can turn logical variables, and factor variables to numeric variables and get mean of them. But we cannot turn character variables to numeric variables and we cannot get mean of character variables.
