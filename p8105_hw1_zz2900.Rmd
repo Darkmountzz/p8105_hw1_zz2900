@@ -4,16 +4,15 @@ author: "Zhenyu Zhou"
 date: "2022-09-22"
 output: html_document
 ---
-
+```{r}
+library(tidyverse)
+```
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
-
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
-
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Problem 1
+Use the following code (in your RMarkdown file) to load the penguins dataset:
 
 ```{r penguins}
 
@@ -21,19 +20,29 @@ data("penguins", package = "palmerpenguins")
 penguins
 
 ```
+Write a short description of the penguins dataset (not the penguins_raw dataset) using inline R code. In your discussion, please include:
 
-* the data in this dataset, including names / values of important variables
+* the data in this dataset, including names / values of important variables:
 
-There are 8 important variables in the penguins dataset. These 8 variables are species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex, year
+  * There are 8 important variables in the penguins dataset. These 8 variables are species, island, bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g, sex, year.
 
-* the size of the dataset (using nrow and ncol)
+* the size of the dataset (using nrow and ncol):
+  * The row number of penguins is `r nrow(penguins)` and column number of penguins is `r ncol(penguins)`. So the size of the dataset is `r nrow(penguins) * ncol(penguins)`.
 
-* the mean flipper length
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
+* the mean flipper length:
+```{r}
+noNA_penguins = drop_na(penguins)
+flipperMean = mean(pull(noNA_penguins, flipper_length_mm))
+flipperMean
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+Make a scatterplot of flipper_length_mm (y) vs bill_length_mm (x); color points using the species variable (adding color = ... inside of aes in your ggplot code should help).
+
+Export your first scatterplot to your project directory using ggsave.
+
+```{r}
+## scatterplot of x and y
+ggplot(noNA_penguins, aes(x = bill_length_mm, y = flipper_length_mm, color = species)) + geom_point()
+ggsave("scatter_plot.pdf")
+```
+
